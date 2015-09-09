@@ -6,23 +6,23 @@ module Kaminari
     end
 
     def entry_name
-      model_name.human.downcase
+      target.model_name.human.downcase
     end
 
     def limit_value #:nodoc:
-      options[:limit]
+      target.options[:limit]
     end
 
     def offset_value #:nodoc:
-      options[:skip]
+      target.options[:skip]
     end
 
     def total_count #:nodoc:
-      @total_count ||= if embedded?
+      @total_count ||= if target.embedded?
         unpage.size
       else
-        if options[:max_scan] && options[:max_scan] < size
-          options[:max_scan]
+        if target.options[:max_scan] && target.options[:max_scan] < size
+          target.options[:max_scan]
         else
           size
         end
@@ -35,6 +35,10 @@ module Kaminari
         crit.options.delete :limit
         crit.options.delete :skip
       end
+    end
+
+    def target
+      @_target ||= self.is_a?(::Mongoid::Contextual::Mongo) ? criteria : self
     end
   end
 end

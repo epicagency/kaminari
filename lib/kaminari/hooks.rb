@@ -10,6 +10,8 @@ module Kaminari
       if defined? ::Mongoid
         require 'kaminari/models/mongoid_extension'
         ::Mongoid::Document.send :include, Kaminari::MongoidExtension::Document
+        ::Mongoid::Contextual::Mongo.send :include, Kaminari::MongoidCriteriaMethods
+        ::Mongoid::Contextual::Mongo.send :include, Kaminari::PageScopeMethods
       end
 
       require 'kaminari/models/array_extension'
