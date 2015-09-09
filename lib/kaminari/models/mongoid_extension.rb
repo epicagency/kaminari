@@ -1,4 +1,5 @@
 require 'kaminari/models/mongoid_criteria_methods'
+require 'kaminari/models/mongoid_contextual_extension'
 
 module Kaminari
   module MongoidExtension
