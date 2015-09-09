@@ -11,6 +11,7 @@ module Kaminari
         require 'kaminari/models/mongoid_extension'
         ::Mongoid::Document.send :include, Kaminari::MongoidExtension::Document
         ::Mongoid::Contextual::Mongo.send :include, Kaminari::MongoidCriteriaMethods
+        ::Mongoid::Contextual::Mongo.send :include, Kaminari::MongoidContextualExtension
         ::Mongoid::Contextual::Mongo.send :include, Kaminari::PageScopeMethods
       end
 
